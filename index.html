@@ -745,7 +745,7 @@ footer{border-top:1px solid var(--line);padding-block:20px clamp(36px,7vw,60px);
         <text class="t" x="366" y="382" style="font-size:13px">Fidelidad al DI</text>
         <text class="t-m" x="366" y="398" style="font-size:9.5px">FASE 06 · AUDITAR</text>
         <polygon class="f-ink3" points="556,385 568,379 568,391"/>
-        <text class="t-b" x="582" y="380" style="font-size:11.5px">el informe: lo ausente, lo partido, los errores</text><text class="t-b" x="582" y="395" style="font-size:11.5px">en imágenes, la capa editorial y el veredicto</text>
+        <text class="t-b" x="582" y="380" style="font-size:11.5px">el informe de fidelidad y el de errores</text><text class="t-b" x="582" y="395" style="font-size:11.5px">de origen, con el responsable de cada uno</text>
         <polygon class="f-ink3" points="822,385 834,379 834,391"/>
         <text class="t-b" x="846" y="380" style="font-size:11.5px">el Arquitecto OVA y el</text><text class="t-b" x="846" y="395" style="font-size:11.5px">equipo instruccional</text>
         <rect class="f-surface s-line" x="20" y="430" width="960" height="66" rx="12" stroke-width="1.4"/>
@@ -915,7 +915,7 @@ footer{border-top:1px solid var(--line);padding-block:20px clamp(36px,7vw,60px);
 
   <div class="fase" id="fase-auditar">
     <div class="fase__head"><h3>Fase 06 · Auditar</h3><span class="fase__quien"><span class="ag__ico ag__ico--gris"><svg aria-hidden="true"><use href="#ic-prog"/></svg></span>verificador</span><span class="fase__quien"><span class="ag__ico"><svg aria-hidden="true"><use href="#ic-fid"/></svg></span><span class="ag__ico ag__ico--robot" title="Agente de IA"><svg aria-hidden="true"><use href="#ic-robot"/></svg></span>agente de fidelidad</span></div>
-    <p class="txt">El verificador es un programa de reglas fijas: busca cada bloque del Word en el curso y exige sus negrillas. El agente revisa lo que el programa no ve, incluidas las imágenes (una figura con un error de texto, una foto que no corresponde), y emite el veredicto.</p>
+    <p class="txt">El verificador es un programa de reglas fijas: busca cada bloque del Word en el curso y exige sus negrillas. El agente revisa lo que el programa no ve y emite el veredicto. Además produce el <strong>informe de errores de origen</strong>: erratas del Word, textos con error dentro de las figuras del diseñador, videos o audios que no coinciden con lo que el Word declara. Cada error va con su responsable; el agente no lo corrige. Ese informe también se corre al recibir los insumos, antes de maquetar.</p>
   <figure>
     <div class="lienzo lienzo--ancho">
       <svg viewBox="0 0 900 300" role="img" aria-label="Cada bloque del Word: si no está en el curso, falta contenido y la entrega se detiene; si está pero perdió una negrilla, faltan pesos y se detiene; si está completo, presente. Aparte, lo que está en el curso y no en el Word es capa editorial y la valida Scala.">
@@ -966,8 +966,9 @@ Negrillas del DI: 11   sin negrilla en el curso: 0
 VEREDICTO: APTO PARA ENTREGA</code></pre>
       </div>
       <div>
-        <p class="k">Capa editorial listada para Scala, entre otras</p>
+        <p class="k">Capa editorial listada para Scala, y errores de origen</p>
         <p>El título de la introducción «La otra mitad del trabajo de decidir» · la cifra «5 a 7 de cada 10» · la sección del pódcast en la conclusión · la duración real del video (el Word dice 1 min 32 s; el archivo mide 2 min 01 s) · las cuatro ilustraciones.</p>
+        <p>Error de origen reportado en la Unidad 2: el Word declara que el video dura 1 min 32 s y el archivo mide 2 min 01 s. Va en el informe para diseño instruccional; el curso muestra la duración real hasta que Scala confirme o corrija el Word.</p>
       </div>
     </div>
   </div>
@@ -991,7 +992,8 @@ VEREDICTO: APTO PARA ENTREGA</code></pre>
    nombre de cliente dentro de `motor/`.
 6. Antes de maquetar una pantalla, `INSTITUCION.md` de esa institución al lado. Al maquetar
    un tema o la introducción, el agente `ilustrador` (la ilustración explicativa de apertura);
-   después de maquetarla, `diagramador`. Antes de entregar, `fidelidad-di`.
+   después de maquetarla, `diagramador`. Al recibir insumos y antes de entregar, `fidelidad-di`
+   (reporta los errores de origen a su responsable; no los corrige).
 7. Shell: es zsh. Una variable con una lista de archivos no se expande por espacios; usa
    `find … -print0 | xargs -0`. Un glob sin coincidencias aborta el comando entero.
 8. **Un bloque `DISEÑO GRÁFICO` del DI ubica una figura; no se maqueta ni se ilustra.** Nunca
@@ -1193,18 +1195,20 @@ Ordena por impacto: primero lo que hace que la pantalla se lea plana, después e
     </article>
     <article class="ag ag--c">
       <div class="ag__head"><span class="ag__nombre"><span class="ag__ico"><svg aria-hidden="true"><use href="#ic-fid"/></svg></span><span class="ag__ico ag__ico--robot" title="Agente de IA"><svg aria-hidden="true"><use href="#ic-robot"/></svg></span><h3>Fidelidad al DI</h3></span><span class="ag__fase">Fase 06</span></div>
-      <p class="lim"><b>Revisa</b>El texto frase por frase y también las imágenes: figuras con errores de texto, fotos que no corresponden. <b>No puede</b>Corregir nada. Decidir sobre la capa editorial. Declarar apto sin haber ejecutado el verificador.</p>
+      <p class="lim"><b>Produce</b>El informe de fidelidad y el informe de errores de origen: erratas del Word (diseño instruccional), textos con error en las figuras (diseño gráfico), medios que no coinciden (quien los entregó). <b>No puede</b>Corregir nada, ni siquiera un error de origen. Decidir sobre la capa editorial. Declarar apto sin haber ejecutado el verificador.</p>
       <p class="ag__ruta">.claude/agents/fidelidad-di.md</p>
       <details><summary>Ver el prompt completo</summary><pre>---
 name: fidelidad-di
-description: Verifica que todo el texto del documento de diseño instruccional (.docx) esté en el curso compilado, detecta bloques partidos por la maquetación, señala el texto editorial que no viene del DI, y encuentra duplicaciones del propio documento. Usar antes de dar por cerrada una unidad y antes de entregar al cliente. Vale para cualquier institución del kit.
+description: Verifica que todo el texto del documento de diseño instruccional (.docx) esté en el curso compilado, detecta bloques partidos por la maquetación, señala el texto editorial que no viene del DI, encuentra duplicaciones del propio documento y reporta los errores de origen (erratas del DI, textos con error dentro de las figuras del diseñador, medios que no coinciden con lo que el DI describe) con su responsable. Usar al recibir los insumos (solo errores de origen), antes de dar por cerrada una unidad y antes de entregar al cliente. Vale para cualquier institución del kit.
 tools: Read, Glob, Grep, Bash
 ---
 
 # Agente: fidelidad al DI
 
-Respondes una sola pregunta con evidencia: **¿está en el curso todo lo que dice el
-documento, y qué hay en el curso que no dice el documento?**
+Respondes dos preguntas con evidencia: **¿está en el curso todo lo que dice el documento, y
+qué hay en el curso que no dice el documento?** Y además: **¿hay errores en lo que llegó de
+fuera** (el Word, las figuras del diseñador, los videos y audios) **que el responsable deba
+corregir?** Tú no los corriges: los reportas con su ubicación y a quién le tocan.
 
 ## Ubícate
 
@@ -1222,7 +1226,7 @@ python3 scripts/verificar-di.py &lt;DI.docx&gt; &lt;curso&gt;/dist/multipagina -
 ```
 
 Devuelve código 1 si falta contenido. **Nunca reportes "todo correcto" sin haberlo
-corrido**; y no te fíes solo de él: los tres puntos siguientes los tienes que mirar tú.
+corrido**; y no te fíes solo de él: los puntos siguientes los tienes que mirar tú.
 
 ## Qué revisas más allá del script
 
@@ -1252,6 +1256,28 @@ maqueta en `&lt;strong&gt;` donde ya está el texto — perder la negrilla es pe
 uno solo el veredicto es `FALTAN PESOS DEL DI`, y el curso no se entrega así. Da la lista
 con su `archivo:línea` para que se apliquen todos de una vez.
 
+**6. Errores de origen.** Lo que llegó con error no es de la maquetación y no se arregla
+aquí: se reporta para que lo corrija quien lo entregó. Revisa tres fuentes:
+
+- **El Word.** Erratas evidentes, cifras que no cuadran entre dos sitios del mismo documento,
+  datos que contradicen el archivo (una duración de video distinta a la del mp4), referencias
+  incompletas. Responsable: diseño instruccional.
+- **Las figuras del diseñador.** Abre cada archivo de `fuente/assets/img/curso/figura-*.webp`
+  (Read) y lee el texto que contiene: erratas («intriduzcas»), un paso repetido, un rótulo que
+  no coincide con lo que dice el bloque `DISEÑO GRÁFICO` o la `Leyenda:`, una figura que no
+  corresponde a su sitio. Responsable: diseño gráfico.
+- **Los medios.** Título, duración y licencia del video y del audio contra lo que el DI
+  declara. Responsable: quien lo entregó.
+
+Cada error va con archivo (o página del Word), qué dice y qué debería decir si se sabe, y una
+captura cuando sea una figura. **No es capa editorial y no es un ausente**: es una fila del
+informe de errores de origen, que va con la entrega y vuelve corregido por la ronda de ajustes
+(las figuras, con el mismo número). Un error de origen no cambia el veredicto de fidelidad:
+el curso puede ser APTO y llevar errores marcados para su responsable.
+
+Cuando te llaman **al recibir los insumos**, antes de maquetar, revisas solo este punto: el
+curso aún no existe y no hay nada que cotejar.
+
 ## Cómo entregas
 
 ```
@@ -1265,11 +1291,21 @@ FIDELIDAD · &lt;institucion&gt;/&lt;curso&gt;
   Diseño gráfico excluido → [N bloques, primera línea de cada uno]
   Duplicados en el DI → [pasaje + las dos ubicaciones]
 VEREDICTO: &lt;APTO PARA ENTREGA | FALTA CONTENIDO | FALTAN PESOS DEL DI&gt;
+
+ERRORES DE ORIGEN · para corregir por su responsable
+  Diseño instruccional → [página o bloque del Word · qué dice · qué debería decir]
+  Diseño gráfico       → [figura-NN · qué dice · qué debería decir · captura]
+  Medios               → [archivo · qué declara el DI · qué mide o dice el archivo]
 ```
+
+El bloque de errores de origen se guarda además en `insumos/ERRORES-ORIGEN-&lt;AAAA-MM-DD&gt;.md`, que
+acompaña la entrega y es lo que se le manda al cliente junto con la lista de capa editorial.
 
 ## Límites
 
 - No corriges la maquetación ni reescribes texto: informas.
+- No corriges los errores de origen: ni una errata del Word ni el texto de una figura. Se
+  reportan a su responsable y vuelven por la ronda de ajustes.
 - No decides sobre la capa editorial ni sobre las duplicaciones: son del cliente.
 - Si el `.docx` cambió desde la última compilación, dilo antes que nada: comparar contra
   un `dist/` viejo no prueba nada.</pre></details>
@@ -1378,7 +1414,7 @@ Curso: `instituciones/&lt;institucion&gt;/cursos/&lt;curso&gt;/`. Lee primero
   </table></div>
 
   <h3>La ronda de ajustes</h3>
-  <p class="txt">Después de la validación, Scala devuelve lo que hay que cambiar: un documento con las observaciones, capturas con un error de texto en una figura, o una versión nueva del Word aprobado. También pueden llegar figuras o videos nuevos. El agente de ajustes recibe todo eso y lo convierte en una tabla; el Arquitecto OVA aprueba fila por fila antes de tocar el curso.</p>
+  <p class="txt">Después de la validación, Scala devuelve lo que hay que cambiar: un documento con las observaciones, lo corregido del informe de errores de origen (figuras con el texto arreglado, el Word con la errata), o una versión nueva del Word aprobado. También pueden llegar figuras o videos nuevos. El agente de ajustes recibe todo eso y lo convierte en una tabla; el Arquitecto OVA aprueba fila por fila antes de tocar el curso.</p>
   <figure>
     <div class="lienzo lienzo--ancho">
       <svg viewBox="0 0 1000 420" role="img" aria-label="Ronda de ajustes en cuatro pasos. Uno: Scala devuelve observaciones, capturas, un Word nuevo, figuras o videos nuevos. Dos: el agente de ajustes ubica cada pedido en su pantalla, detecta figuras y videos con versión nueva, compara el Word nuevo con el aprobado y arma una tabla. Tres: el Arquitecto OVA aprueba la tabla fila por fila. Cuatro: se aplica, se verifica de nuevo y se entrega; lo ambiguo vuelve a Scala como pregunta.">
@@ -1386,7 +1422,7 @@ Curso: `instituciones/&lt;institucion&gt;/cursos/&lt;curso&gt;/`. Lee primero
         <text class="t-m t-v" x="36" y="64">1 · SCALA DEVUELVE</text>
         <g color="var(--violeta)"><use href="#ic-persona" x="36" y="76" width="30" height="30"/></g>
         <text class="t-b" x="36" y="128" style="font-size:11.5px">observaciones en Word o PDF</text>
-        <text class="t-b" x="36" y="144" style="font-size:11.5px">capturas con errores de texto</text>
+        <text class="t-b" x="36" y="144" style="font-size:11.5px">lo corregido del informe de errores</text>
         <text class="t-b" x="36" y="160" style="font-size:11.5px">un Word aprobado con cambios</text>
         <text class="t-b" x="36" y="176" style="font-size:11.5px">figuras o videos nuevos</text>
         <polygon class="f-ink3" points="234,115 248,122 234,129"/>
@@ -1599,7 +1635,7 @@ Curso: `instituciones/&lt;institucion&gt;/cursos/&lt;curso&gt;/`. Lee primero
   <ul class="lista">
     <li><strong>ZIP del curso</strong> para el aula, con fecha.</li>
     <li><strong>ZIP del proyecto fuente</strong>, editable y recompilable, con su guía para el equipo técnico de Scala: contenido por pantalla, un archivo de configuración con menú, glosario y referencias, y el compilador. Con Node 18 o superior se recompila con un solo comando; también trae vista previa local, pruebas y empaquetado.</li>
-    <li><strong>Informe de fidelidad al Word</strong> con la lista de capa editorial a validar, y el <strong>guion de ilustraciones</strong>: qué frase del Word respalda cada elemento de cada dibujo.</li>
+    <li><strong>Informe de fidelidad al Word</strong> con la lista de capa editorial a validar, el <strong>informe de errores de origen</strong> con el responsable de cada uno, y el <strong>guion de ilustraciones</strong>: qué frase del Word respalda cada elemento de cada dibujo.</li>
     <li><strong>Repositorio del curso</strong> en la cuenta de Scala en GitHub, con publicación automática: cada versión queda fechada y en línea para revisión.</li>
   </ul>
   <div class="tabla"><table>
